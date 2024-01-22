@@ -105,18 +105,78 @@
 
 -- Drop existing tables, so you'll start fresh each time this script is run.
 -- TODO!
+drop table Movies;
+drop table top_cast;
 
 -- Create new tables, according to your domain model
 -- TODO!
+CREATE TABLE movies (
+  tittle TEXT,
+  year_released TEXT,
+  MPAA_rating TEXT,
+  studio_information TEXT
+);
+
+CREATE TABLE top_cast (
+  tittle TEXT,
+  actor TEXT,
+  character TEXT,
+  studio_information TEXT
+);
 
 -- Insert data into your database that reflects the sample data shown above
 -- Use hard-coded foreign key IDs when necessary
 -- TODO!
+insert into movies (
+    tittle,
+    year_released,
+    MPAA_rating,
+    studio_information
+) values(
+    "Batman Begins",
+    "2005",
+    "PG-13",
+    "Warner Bros"
+), (
+    "The Dark Knight",
+    "2008",
+    "PG-13",
+    "Warner Bros"
+), (
+    "The Dark Knight Rises",
+    "2012",
+    "PG-13",
+    "Warner Bros"
+);
+
+insert into top_cast (
+    tittle,
+    actor,
+    character
+) values
+    ("Batman Begins", "Christian Bale", "Bruce Wayne"),
+    ("Batman Begins", "Michael Caine", "Alfred"),
+    ("Batman Begins", "Liam Neeson", "Ra's Al Ghul"),
+    ("Batman Begins", "Katie Holmes", "Rachel Dawes"),
+    ("Batman Begins", "Gary Oldman", "Commissioner Gordon"),
+    ("The Dark Knight", "Christian Bale", "Bruce Wayne"),
+    ("The Dark Knight", "Heath Ledger", "Joker"),
+    ("The Dark Knight", "Aaron Eckhart", "Harvey Dent"),
+    ("The Dark Knight", "Michael Caine", "Alfred"),
+    ("The Dark Knight", "Maggie Gyllenhaal", "Rachel Dawes"),
+    ("The Dark Knight Rises", "Christian Bale", "Bruce Wayne"),
+    ("The Dark Knight Rises", "Gary Oldman", "Commissioner Gordon"),
+    ("The Dark Knight Rises", "Tom Hardy", "Bane"),
+    ("The Dark Knight Rises", "Joseph Gordon-Levitt", "John Blake"),
+    ("The Dark Knight Rises", "Anne Hathaway", "Selina Kyle");
+
+
 
 -- Prints a header for the movies output
 .print "Movies"
 .print "======"
 .print ""
+
 
 -- The SQL statement for the movies output
 -- TODO!
