@@ -88,7 +88,7 @@
 -- Batman Begins          Liam Neeson           Ra's Al Ghul
 -- Batman Begins          Katie Holmes          Rachel Dawes
 -- Batman Begins          Gary Oldman           Commissioner Gordon
--- The Dark Knight        Christian Bale        Bruce Wayne
+-- The Dark Knight        Christian Bale        Bruce Wayneabout:blank#blocked
 -- The Dark Knight        Heath Ledger          Joker
 -- The Dark Knight        Aaron Eckhart         Harvey Dent
 -- The Dark Knight        Michael Caine         Alfred
@@ -105,23 +105,30 @@
 
 -- Drop existing tables, so you'll start fresh each time this script is run.
 -- TODO!
-drop table Movies;
+drop table movies;
+drop table studios;
 drop table top_cast;
 
 -- Create new tables, according to your domain model
 -- TODO!
 CREATE TABLE movies (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
   tittle TEXT,
   year_released TEXT,
   MPAA_rating TEXT,
-  studio_information TEXT
+  studio_id INTEGER
+);
+
+CREATE TABLE studios (
+    id integer primary key autoincrement,
+    studio_name text
 );
 
 CREATE TABLE top_cast (
-  tittle TEXT,
+  id integer primary key autoincrement,
   actor TEXT,
   character TEXT,
-  studio_information TEXT
+  movie_id
 );
 
 -- Insert data into your database that reflects the sample data shown above
@@ -131,45 +138,50 @@ insert into movies (
     tittle,
     year_released,
     MPAA_rating,
-    studio_information
+    studio_id
 ) values(
     "Batman Begins",
     "2005",
     "PG-13",
-    "Warner Bros"
+    "1"
 ), (
     "The Dark Knight",
     "2008",
     "PG-13",
-    "Warner Bros"
+    "1"
 ), (
     "The Dark Knight Rises",
     "2012",
     "PG-13",
-    "Warner Bros"
+    "1"
+);
+
+insert into studios (
+    studio_name
+) values(
+    "Warner Bros."
 );
 
 insert into top_cast (
-    tittle,
     actor,
-    character
+    character,
+    movie_id
 ) values
-    ("Batman Begins", "Christian Bale", "Bruce Wayne"),
-    ("Batman Begins", "Michael Caine", "Alfred"),
-    ("Batman Begins", "Liam Neeson", "Ra's Al Ghul"),
-    ("Batman Begins", "Katie Holmes", "Rachel Dawes"),
-    ("Batman Begins", "Gary Oldman", "Commissioner Gordon"),
-    ("The Dark Knight", "Christian Bale", "Bruce Wayne"),
-    ("The Dark Knight", "Heath Ledger", "Joker"),
-    ("The Dark Knight", "Aaron Eckhart", "Harvey Dent"),
-    ("The Dark Knight", "Michael Caine", "Alfred"),
-    ("The Dark Knight", "Maggie Gyllenhaal", "Rachel Dawes"),
-    ("The Dark Knight Rises", "Christian Bale", "Bruce Wayne"),
-    ("The Dark Knight Rises", "Gary Oldman", "Commissioner Gordon"),
-    ("The Dark Knight Rises", "Tom Hardy", "Bane"),
-    ("The Dark Knight Rises", "Joseph Gordon-Levitt", "John Blake"),
-    ("The Dark Knight Rises", "Anne Hathaway", "Selina Kyle");
-
+    ("Christian Bale", "Bruce Wayne", "1"),
+    ("Michael Caine", "Alfred", "1"),
+    ("Liam Neeson", "Ra's Al Ghul", "1"),
+    ("Katie Holmes", "Rachel Dawes", "1"),
+    ("Gary Oldman", "Commissioner Gordon", "1"),
+    ("Christian Bale", "Bruce Wayne", "2"),
+    ("Heath Ledger", "Joker", "2"),
+    ("Aaron Eckhart", "Harvey Dent", "2"),
+    ("Michael Caine", "Alfred", "2"),
+    ("Maggie Gyllenhaal", "Rachel Dawes", "2"),
+    ("Christian Bale", "Bruce Wayne", "3"),
+    ("Gary Oldman", "Commissioner Gordon", "3"),
+    ("Tom Hardy", "Bane", "3"),
+    ("Joseph Gordon-Levitt", "John Blake", "3"),
+    ("Anne Hathaway", "Selina Kyle", "3");
 
 
 -- Prints a header for the movies output
@@ -180,6 +192,9 @@ insert into top_cast (
 
 -- The SQL statement for the movies output
 -- TODO!
+select tittle, year_released, MPAA_rating, studios.studio_name
+from movies inner join studios on movies.studio_id = studios.id;
+
 
 -- Prints a header for the cast output
 .print ""
@@ -190,3 +205,4 @@ insert into top_cast (
 
 -- The SQL statement for the cast output
 -- TODO!
+Select tittle, actor, character from movies inner join top_cast on movies.id = Top_cast.movie_id;
